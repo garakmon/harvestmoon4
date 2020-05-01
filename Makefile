@@ -24,7 +24,7 @@ FIX     := tools/gbafix/gbafix$(EXE)
 
 
 #### Target Info ####
-BUILD_NAME := harvestmoon4
+BUILD_NAME := hm4
 
 TITLE       := HARVESTMOGBA
 GAME_CODE   := A4NE

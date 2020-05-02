@@ -5,6 +5,7 @@
 
 typedef char u8;
 typedef unsigned int u32;
+typedef int s32;
 
 struct NPC_RAM_DATA {
     u32 unknown0; //0-3
@@ -15,18 +16,16 @@ struct NPC_RAM_DATA {
 };
 
 //Increases an NPC's affection value
-//r0 NPC address in RAM, r1 amount to add
 void sub_809E370(struct NPC_RAM_DATA *t, u32 amount) {
     u32 sum = t->Affection + amount;
     u32 affection = sum;
     //Clamps the value if outside 0-255 range
-    if ((int)sum < 0) {
+    if ((s32)sum < 0) {
         affection = 0;
-    }
-    else if (sum>0xff) {
+    } else if (sum>0xff) {
         affection = 0xff;
     }
-    t->Affection = (u8)affection;
+    t->Affection = affection;
 }
 
 //Decreases an NPC's affection value
@@ -34,10 +33,9 @@ void sub_809E38C(struct NPC_RAM_DATA *t, u32 amount){
     sub_809E370(t, -amount);
 }
 
-//Stores byte r1 at address r0 with an offset of 8 bytes
-//Most likely used to initialize NPC affection values
-void sub_809E398(u32 r0, u32 r1){
-  *(u8 *)(r0 + 0x8) = r1;
+//Sets an NPC's affection value
+void sub_809E398(struct NPC_RAM_DATA *t, u32 amount) {
+  t->Affection = amount;
 }
 
 //Checks if the player has ever talked to this NPC

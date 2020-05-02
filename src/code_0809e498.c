@@ -1,6 +1,8 @@
+
 typedef char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
+typedef int s32;
 
 struct BACHELORETTE_RAM_DATA {
     u32 unknown0; //0-3
@@ -37,4 +39,25 @@ u32 sub_809E4B4(struct BACHELORETTE_RAM_DATA *t){
 
 u32 sub_809E4BC(struct BACHELORETTE_RAM_DATA *t){
     return ((u32)t->unknown6 << 0x19) >> 0x1d;
+}
+
+//Increases a bachelorette's affection
+void sub_809E4C4(struct BACHELORETTE_RAM_DATA *t,int amount){
+    u32 sum = t->Affection + amount;
+    u32 affection = sum;
+    //Clamps the value if outside 0x0000-0xffff range
+    if ((s32)sum < 0) {
+        affection = 0;
+    }else if (0xffff < sum) {
+        affection = 0xffff;
+    }
+    t->Affection = affection;
+}
+//Decreases a bachelorette's affection
+void sub_809E4E8(struct BACHELORETTE_RAM_DATA *t,int amount){
+    sub_809E4C4(t, -amount);
+}
+//Sets a bachelorette's affection
+void sub_809E4F4(struct BACHELORETTE_RAM_DATA *t,int amount){
+    t->Affection = amount;
 }

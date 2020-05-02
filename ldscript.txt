@@ -8,6 +8,9 @@ SECTIONS
     {
         asm/code.o(.text);
         src/code_0809e370.o(.text);
+        asm/sub_809E3E8.o(.text);
+        asm/sub_809E458.o(.text);
+        src/code_0809e498.o(.text);
         asm/code1.o(.text);
         data/data.o(.rodata);
     } = 0

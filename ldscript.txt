@@ -23,10 +23,7 @@ SECTIONS
         src/code_0809e33c.o(.text);  /* NPC 1          */
         asm/sub_809E368.o(.text);    /* uknown         */
         src/code_0809e370.o(.text);  /* NPC 2          */
-
-        asm/sub_809E3E8.o(.text);    /* Talked to NPC? */
         asm/sub_809E458.o(.text);    /* uknown         */
-
         src/code_0809e498.o(.text);  /* Bachelorette   */
 
         asm/code1.o(.text);

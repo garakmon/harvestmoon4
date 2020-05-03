@@ -11,8 +11,18 @@ struct NPC_RAM_DATA {
     u32 unknown0; //0-3
     u32 unknown1; //4-7
     u8 Affection; //8
-    u8 Flags1; //9
-    u8 Flags2; //10
+    u32 f10:5; //
+    u32 f11:1; // F_SPOKEN_TODAY
+    u32 f12:1; // F_SPOKEN_CURRENT_AREA
+    u32 f13:1; // F_GIVEN_GIFT
+    u32 f14:1; // F_SPOKEN_EVER
+    u32 f15:1; // 
+    u32 f16:1; // 
+    u32 f17:1; // 
+    u32 f18:1; // 
+    u32 f19:1; // 
+    u32 f1a:1; // 
+    u32 f1b:1; //
 };
 
 //Increases an NPC's affection value
@@ -39,38 +49,26 @@ void sub_809E398(struct NPC_RAM_DATA *t, u32 amount) {
 }
 
 //Checks if the player has ever talked to this NPC
+//Clears the unknown 5bit value
 void sub_809E39C(struct NPC_RAM_DATA *t) {
-    u32 r1 = t->Flags2;
-    u32 r0 = r1 << 0x1f;
-    if (r0 != 0) { //If so, set the F_SPOKEN_TODAY and F_SPOKEN_CURRENT_AREA flags 
-        u32 temp = t->Flags1;
-        temp |= F_SPOKEN_TODAY;
-        temp |= F_SPOKEN_CURRENT_AREA;
-        t->Flags1 = temp;
+    if (t->f14 != 0) { //If so, set the F_SPOKEN_TODAY and F_SPOKEN_CURRENT_AREA flags 
+        t->f11 = 1;
+        t->f12 = 1;
     } else { //Else set the spoken flag
-        u32 temp = F_SPOKEN_EVER;
-        temp |= r1;
-        t->Flags2 = temp;
+        t->f14 = 1;
     }
-    r1 = t->Flags1;
-    r0 = -0x20;
-    r0 &= r1;
-    t->Flags1 = r0;
+    t->f10 = 0;
 }
 
 //Sets the F_GIVEN_GIFT flag
-//The registers get switched up if the second = is not there
+//Also clears the unknown 5bit value
 void sub_809E3CC(struct NPC_RAM_DATA *t) {
-    u32 r1  = t->Flags1 |= F_GIVEN_GIFT;
-    r1 &= -0x20;
-    t->Flags1 = r1;
+    t->f13 = 1;
+    t->f10 = 0;
 }
 
 //Clears F_SPOKEN_CURRENT_AREA
 //Called when you go from one area to another and for every NPC (41)
 void sub_809E3DC(struct NPC_RAM_DATA *t){
-    u32 r2 = t->Flags1;
-    u32 r1 = -0x41;
-    r1 &= r2;
-    t->Flags1 = r1;
+    t->f12 = 0;
 }

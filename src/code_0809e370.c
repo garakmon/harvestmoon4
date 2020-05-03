@@ -16,13 +16,6 @@ struct NPC_RAM_DATA {
     u32 f12:1; // F_SPOKEN_CURRENT_AREA
     u32 f13:1; // F_GIVEN_GIFT
     u32 f14:1; // F_SPOKEN_EVER
-    u32 f15:1; // 
-    u32 f16:1; // 
-    u32 f17:1; // 
-    u32 f18:1; // 
-    u32 f19:1; // 
-    u32 f1a:1; // 
-    u32 f1b:1; //
 };
 
 //Increases an NPC's affection value
@@ -45,7 +38,7 @@ void sub_809E38C(struct NPC_RAM_DATA *t, u32 amount){
 
 //Sets an NPC's affection value
 void sub_809E398(struct NPC_RAM_DATA *t, u32 amount) {
-  t->Affection = amount;
+    t->Affection = amount;
 }
 
 //Checks if the player has ever talked to this NPC

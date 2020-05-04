@@ -1,0 +1,10 @@
+. = 0x00000000; gUnknown_02000000 = .;
+. = 0x00000C80; gUnknown_02000C80 = .;
+. = 0x00001C30; gUnknown_02001C30 = .;
+. = 0x00001C34; gUnknown_02001C34 = .;
+. = 0x00001CB8; gUnknown_02001CB8 = .;
+. = 0x00001CBC; gUnknown_02001CBC = .;
+. = 0x00001CC0; gUnknown_02001CC0 = .;
+. = 0x00001EC0; gUnknown_02001EC0 = .;
+. = 0x00001F10; gUnknown_02001F10 = .;
+. = 0x00040000; gUnknown_02040000 = .;

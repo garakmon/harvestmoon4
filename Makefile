@@ -100,6 +100,8 @@ $(ROM): $(ELF)
 	$(FIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
 $(ELF): $(ALL_OBJS) $(LDSCRIPT)
+	cp sym_iwram.txt $(BUILD_DIR)
+	cp sym_ewram.txt $(BUILD_DIR)
 	cd $(BUILD_DIR) && $(LD) -T ../$(LDSCRIPT) -Map ../$(MAP) -o ../$@
 
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
